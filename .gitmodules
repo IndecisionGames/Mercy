@@ -1,0 +1,3 @@
+[submodule "RQ-Engine"]
+	path = RQ-Engine
+	url = https://github.com/IndecisionGames/RQ-Engine.git
