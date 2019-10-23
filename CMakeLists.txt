@@ -6,6 +6,7 @@ set (Mercy_VERSION_MINOR 1)
 
 # game
 add_executable(Mercy main.cpp)
+# add_executable(Mercy lq_test.cpp)
 
 # engine
 add_subdirectory(RQ-Engine)
