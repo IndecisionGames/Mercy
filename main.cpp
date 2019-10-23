@@ -1,27 +1,33 @@
 #include "RQ_Engine.h"
-int main()
-{
-    //Create the main window
-    sf::RenderWindow window(sf::VideoMode(800, 600), "SFML window");
+int main(){
+
+    RQEngine::Window window("Mercy", 1280, 720, 120);
+    RQEngine::InputManager IM;
 
     b2Vec2 gravity(0.0f, -10.0f);
     b2World world(gravity);
+    int count = 0;
 
     // Start the game loop
-    while (window.isOpen())
-    {
-        // Process events
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            // Close window: exit
-            if (event.type == sf::Event::Closed)
-                window.close();
+    while (window.isOpen()){
+
+        window.update();
+
+        if(IM.isKeyUp(KeyCode::MouseLeft)){
+            std::cout << "MB1 Released" << std::endl;
+
+        }else if(IM.isKeyPressed(KeyCode::MouseLeft)){
+
+            if(IM.isKeyHeld(KeyCode::MouseLeft)){
+                std::cout << "MB1 Held" << std::endl;
+            }else{
+                std::cout << "MB1 Pressed" << std::endl;
+            }
         }
-        // Clear screen
-        window.clear();
-        // Update the window
-        window.display();
+        window.prepareFrame();
+        window.drawFrame();
     }
+
     return EXIT_SUCCESS;
+
 }
