@@ -5,10 +5,9 @@ using namespace RQEngine;
 int main()
 {
     InputManager IM;
-    ResourceManager* res = new ResourceManager();
+    ResourceManager RM;
 
     // Create the main window
-    //sf::RenderWindow window(sf::VideoMode(800, 600), "Mercy");
 	Window window("Mercy", 1280, 720, 120);
 
     b2Vec2 gravity(0.0f, -10.0f);
@@ -17,15 +16,18 @@ int main()
 	bool held = false;
 
 	// Load resources
-	if (res->loadTexture("assets/textures/wall128x128.png", "wall", false)) {
+	if (RM.loadTexture("assets/textures/wall128x128.png", "wall", false)) {
 		printf("Loaded texture\n");
 	}
-	if (res->createSprite("s", "wall", 0, 0, 128, 128)) {
-		printf("Created sprite\n");
+
+	std::vector <sf::Sprite> walls;
+	for (int i = 0; i < 10; i++) {
+		for (int j = 0; j < 8; j++) {
+			sf::Sprite sprite = ResourceManager::createSprite("wall", 0, 0, 128, 128); //createSprite will be moved to a different class
+			sprite.setPosition(128 * i, 128 * j);
+			walls.push_back(sprite);
+		}
 	}
-
-	sf::Sprite* sprite = ResourceManager::getSprite("s");
-
 	
 	// Game loop
     while (window.isOpen())
@@ -36,25 +38,25 @@ int main()
             std::cout << "MB1 Released" << std::endl;
 			held = false;
 
-        }else if(IM.isKeyPressed(KeyCode::MouseLeft)){
+        } else if (IM.isKeyPressed(KeyCode::MouseLeft)){
 
             if(IM.isKeyHeld(KeyCode::MouseLeft)){
 				if (!held) {
 					std::cout << "MB1 Held" << std::endl;
 					held = true;
 				}
-            }else{
+            } else {
                 std::cout << "MB1 Pressed" << std::endl;
 
             }
         }
-		
-
 		window.prepareFrame();
-		window.draw(*sprite);
+		for (sf::Sprite s : walls) {
+			window.draw(s);
+		}
         window.drawFrame();
     }
 
-	res->~ResourceManager();
+	ResourceManager::cleanUp();
     return EXIT_SUCCESS;
 }
