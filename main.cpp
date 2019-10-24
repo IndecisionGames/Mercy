@@ -14,6 +14,7 @@ int main()
     b2Vec2 gravity(0.0f, -10.0f);
     b2World world(gravity);
 	int count = 0;
+	bool held = false;
 
 	// Load resources
 	if (res->loadTexture("assets/textures/wall128x128.png", "wall", false)) {
@@ -33,15 +34,21 @@ int main()
 
         if(IM.isKeyUp(KeyCode::MouseLeft)){
             std::cout << "MB1 Released" << std::endl;
+			held = false;
 
         }else if(IM.isKeyPressed(KeyCode::MouseLeft)){
 
             if(IM.isKeyHeld(KeyCode::MouseLeft)){
-                std::cout << "MB1 Held" << std::endl;
+				if (!held) {
+					std::cout << "MB1 Held" << std::endl;
+					held = true;
+				}
             }else{
                 std::cout << "MB1 Pressed" << std::endl;
+
             }
         }
+		
 
 		window.prepareFrame();
 		window.draw(*sprite);
