@@ -7,3 +7,6 @@ CMakeSettings.json
 # Build files
 bin/
 out/
+
+# Local scripts
+run.sh

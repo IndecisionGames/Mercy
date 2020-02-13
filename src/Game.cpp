@@ -12,17 +12,17 @@ void Game::Start() {
     b2World world(gravity);
 
     // Load resources
-    if (RM.loadTexture("assets/textures/wall128x128.png", "wall")) {
-        printf("Loaded texture\n");
-    }
+    // if (RM.loadTexture("assets/textures/wall128x128.png", "wall")) {
+    //     printf("Loaded texture\n");
+    // }
 
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 8; j++) {
-            sf::Sprite sprite = ResourceManager::createSprite("wall", 0, 0, 128, 128); //createSprite will be moved to a different class
-            sprite.setPosition(128.0f * i, 128.0f * j);
-            walls.push_back(sprite);
-        }
-    }
+    // for (int i = 0; i < 10; i++) {
+    //     for (int j = 0; j < 8; j++) {
+    //         sf::Sprite sprite = ResourceManager::createSprite("wall", 0, 0, 128, 128); //createSprite will be moved to a different class
+    //         sprite.setPosition(128.0f * i, 128.0f * j);
+    //         walls.push_back(sprite);
+    //     }
+    // }
 
 };
 
